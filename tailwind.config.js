@@ -4,10 +4,13 @@ export default {
     theme: {
         extend: {
             colors: {
-                YellowOchre: '#D99904',
-                SunnyYellow: '#EEFF25',
-                Cinder: '#151515',
-                SmokeyGrey: '#737373',
+                yellowOchre: '#D99904',
+                sunnyYellow: '#EEFF25',
+                cinder: '#151515',
+                smokeyGrey: '#737373',
+            },
+            fontFamily: {
+                cinzel: ['Cinzel, serif'],
             },
         },
     },
