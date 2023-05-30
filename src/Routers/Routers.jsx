@@ -5,6 +5,8 @@ import Login from '../Pages/Login/Login';
 import Order from '../Pages/Order/Order/Order';
 import Menu from '../Pages/OurMenu/Menu/Menu';
 import Register from '../Pages/Register/Register';
+import Secret from '../Pages/Shared/Secret/Secret';
+import PrivateRoute from './PrivateRoute';
 
 const routers = new createBrowserRouter([
     {
@@ -24,12 +26,24 @@ const routers = new createBrowserRouter([
                 element: <Login />,
             },
             {
-                path: '/our-shop/:title',
+                path: '/our-shop/',
+                element: <Order />,
+            },
+            {
+                path: '/our-shop/:category',
                 element: <Order />,
             },
             {
                 path: '/register',
                 element: <Register />,
+            },
+            {
+                path: '/secret',
+                element: (
+                    <PrivateRoute>
+                        <Secret />
+                    </PrivateRoute>
+                ),
             },
         ],
     },

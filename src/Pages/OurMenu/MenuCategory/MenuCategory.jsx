@@ -12,7 +12,7 @@ function MenuCategory({ items, title }) {
                 ))}
             </div>
 
-            <Link to={`/our-shop/${title} || dessert`}>
+            <Link to={`/our-shop/${title}`}>
                 <button className="text-xl px-5 py-2 rounded-lg border-b-4  mt-6 text-cinder text-center    ">
                     Order Now
                 </button>

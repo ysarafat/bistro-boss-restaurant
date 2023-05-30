@@ -1,12 +1,22 @@
 import React, { useContext } from 'react';
+import { HiShoppingCart } from 'react-icons/hi2';
 import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Providers/AuthProvider';
 
 function Navbar() {
     const { user, signOutUser } = useContext(AuthContext);
     const signOutHandler = () => {
         signOutUser()
-            .then(() => console.log('sing out secssfull'))
+            .then(() => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Sign Out Successful',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            })
             .catch((err) => console.log(err.message));
     };
     const navLinks = (
@@ -93,8 +103,12 @@ function Navbar() {
         <nav className="bg-cinder py-5 bg-opacity-70 fixed z-40 w-full">
             <div className="flex items-center justify-between max-w-screen-xl mx-auto">
                 <h1 className="text-3xl font-cinzel text-white">Bistro Boss</h1>
-                <div>
+                <div className="flex items-center gap-10">
                     <ul className="flex items-center gap-4 text-base uppercase">{navLinks}</ul>
+                    <button className="btn gap-2">
+                        <HiShoppingCart color="#fff" size={25} />
+                        <div className="badge badge-secondary">0</div>
+                    </button>
                 </div>
             </div>
         </nav>

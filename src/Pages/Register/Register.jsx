@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext } from 'react';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider';
 import authImg from '../../assets/others/authentication1.png';
 
@@ -16,6 +17,13 @@ function Register() {
             .then((res) => {
                 console.log(res.user);
                 updateUser(name);
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Sign Up Successful',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
             })
             .catch((err) => {
                 console.log(err.message);

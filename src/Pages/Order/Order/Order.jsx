@@ -9,8 +9,8 @@ import OrderTab from '../OrderTab/OrderTab';
 
 function Order() {
     const catagories = ['dessert', 'soup', 'salad', 'pizza', 'drinks'];
-    const { title } = useParams();
-    const initialIndex = catagories.indexOf(title);
+    const { category } = useParams();
+    const initialIndex = catagories.indexOf(category);
     const [tabIndex, setTabIndex] = useState(initialIndex);
     const [menu] = useMenu();
     const drinks = menu.filter((items) => items.category === 'drinks');

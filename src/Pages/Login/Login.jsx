@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext, useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from 'react-simple-captcha';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider';
 import authImg from '../../assets/others/authentication1.png';
 import './login.css';
@@ -8,6 +10,9 @@ import './login.css';
 function Login() {
     const captchaRef = useRef(null);
     const { signInUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, []);
@@ -22,6 +27,14 @@ function Login() {
             signInUser(email, password)
                 .then((res) => {
                     console.log(res.user);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Sign In Successful',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    navigate(from, { replace: true });
                 })
                 .catch((err) => {
                     console.log(err.message);
