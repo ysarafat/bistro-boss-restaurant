@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../../Providers/AuthProvider';
 
 function Navbar() {
+    const { user, signOutUser } = useContext(AuthContext);
+    const signOutHandler = () => {
+        signOutUser()
+            .then(() => console.log('sing out secssfull'))
+            .catch((err) => console.log(err.message));
+    };
     const navLinks = (
         <>
             <NavLink
@@ -44,6 +51,42 @@ function Navbar() {
             >
                 <li>Contact Us</li>
             </NavLink>
+            {!user && (
+                <>
+                    <NavLink
+                        to="/login"
+                        className={({ isActive }) =>
+                            isActive
+                                ? 'text-sunnyYellow'
+                                : 'text-white hover:text-yellowOchre duration-300'
+                        }
+                    >
+                        <li>Sign In</li>
+                    </NavLink>
+                    <NavLink
+                        to="/register"
+                        className={({ isActive }) =>
+                            isActive
+                                ? 'text-sunnyYellow'
+                                : 'text-white hover:text-yellowOchre duration-300'
+                        }
+                    >
+                        <li>Sign Up</li>
+                    </NavLink>
+                </>
+            )}
+            {user && (
+                <NavLink
+                    onClick={signOutHandler}
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'text-sunnyYellow'
+                            : 'text-white hover:text-yellowOchre duration-300'
+                    }
+                >
+                    <li>Sign Out</li>
+                </NavLink>
+            )}
         </>
     );
     return (
