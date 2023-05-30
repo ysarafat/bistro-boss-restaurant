@@ -3,9 +3,11 @@ import { HiShoppingCart } from 'react-icons/hi2';
 import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Providers/AuthProvider';
+import useCart from '../../../hooks/useCart';
 
 function Navbar() {
     const { user, signOutUser } = useContext(AuthContext);
+    const [cart] = useCart();
     const signOutHandler = () => {
         signOutUser()
             .then(() => {
@@ -107,7 +109,7 @@ function Navbar() {
                     <ul className="flex items-center gap-4 text-base uppercase">{navLinks}</ul>
                     <button className="btn gap-2">
                         <HiShoppingCart color="#fff" size={25} />
-                        <div className="badge badge-secondary">0</div>
+                        <div className="badge badge-secondary">+{cart.length}</div>
                     </button>
                 </div>
             </div>

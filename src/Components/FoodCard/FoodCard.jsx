@@ -2,14 +2,16 @@ import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider';
+import useCart from '../../hooks/useCart';
 
 function FoodCard({ items }) {
     const { user } = useContext(AuthContext);
+    const [, refetch] = useCart();
     const { name, image, recipe, price, _id } = items;
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleAddToCart = (item) => {
+    const handleAddToCart = () => {
         if (user && user.email) {
             const cartItem = { itemId: _id, name, image, price, email: user.email };
             fetch('http://localhost:5000/carts', {
@@ -29,6 +31,7 @@ function FoodCard({ items }) {
                             showConfirmButton: false,
                             timer: 1500,
                         });
+                        refetch();
                     }
                 });
         } else {
@@ -56,7 +59,7 @@ function FoodCard({ items }) {
                 <h2 className="card-title">{name}</h2>
                 <p>{recipe}</p>
                 <div className="card-actions justify-center">
-                    <button onClick={() => handleAddToCart(items)} className="btn btn-primary">
+                    <button onClick={() => handleAddToCart()} className="btn btn-primary">
                         Add To Cart
                     </button>
                 </div>
