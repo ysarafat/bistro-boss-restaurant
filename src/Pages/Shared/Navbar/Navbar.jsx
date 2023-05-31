@@ -40,7 +40,7 @@ function Navbar() {
                 <li>Our Menu</li>
             </NavLink>
             <NavLink
-                to="/our-shop"
+                to="/our-shop/dessert"
                 className={({ isActive }) =>
                     isActive ? 'text-sunnyYellow' : 'text-white hover:text-yellowOchre duration-300'
                 }

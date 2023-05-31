@@ -28,7 +28,6 @@ function AuthProvider({ children }) {
             displayName: name,
         })
             .then(() => {
-                console.log('update User profile');
                 setLoading(false);
             })
             .catch((err) => console.log(err.message));

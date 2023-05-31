@@ -14,16 +14,29 @@ function Register() {
         const password = form.password.value;
         console.log(password, email, name);
         signUpUser(email, password)
-            .then((res) => {
-                console.log(res.user);
+            .then(() => {
                 updateUser(name);
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Sign Up Successful',
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
+                const userInfo = { userName: name, userEmail: email };
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(userInfo),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.insertedId) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Sign Up Successful',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        }
+                    });
             })
             .catch((err) => {
                 console.log(err.message);
