@@ -16,7 +16,7 @@ function Register() {
         signUpUser(email, password)
             .then(() => {
                 updateUser(name);
-                const userInfo = { userName: name, userEmail: email };
+                const userInfo = { userName: name, userEmail: email, role: 'user' };
                 fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: {

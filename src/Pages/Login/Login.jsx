@@ -5,6 +5,7 @@ import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from 'react-s
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider';
 import authImg from '../../assets/others/authentication1.png';
+import GoogleLogin from '../Shared/SocialLogin/GoogleLogin';
 import './login.css';
 
 function Login() {
@@ -87,6 +88,8 @@ function Login() {
                         value="Sign In"
                     />
                 </form>
+                <div className="divider px-20"> or</div>
+                <GoogleLogin />
             </div>
         </section>
     );
