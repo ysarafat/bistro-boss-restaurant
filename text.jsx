@@ -1,0 +1,2 @@
+import { useQuery } from 'react-query';
+const { data, isLoading, error } = useQuery('post', () => { // Fetch the post data from an API. }); if (isLoading) { // Show a loading indicator. } else if (error) { // Handle the error. } else { // Render the post data. }

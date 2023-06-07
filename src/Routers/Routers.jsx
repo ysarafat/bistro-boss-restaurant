@@ -1,7 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../Layouts/Dashboard';
 import Main from '../Layouts/Main';
+import AddItems from '../Pages/Dashboard/AddItems/AddItems';
 import AllUsers from '../Pages/Dashboard/AllUsers/AllUsers';
+import ManageItems from '../Pages/Dashboard/ManageItems/ManageItems';
 import MyCart from '../Pages/Dashboard/MyCart/MyCart';
 import Home from '../Pages/Home/Home/Home';
 import Login from '../Pages/Login/Login';
@@ -10,6 +12,7 @@ import Menu from '../Pages/OurMenu/Menu/Menu';
 import Register from '../Pages/Register/Register';
 import Secret from '../Pages/Shared/Secret/Secret';
 import PrivateRoute from './PrivateRoute';
+import AdminRoute from './adminRoute';
 
 const routers = new createBrowserRouter([
     {
@@ -49,7 +52,11 @@ const routers = new createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard />,
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        ),
         children: [
             {
                 path: 'myCart',
@@ -57,7 +64,27 @@ const routers = new createBrowserRouter([
             },
             {
                 path: 'users',
-                element: <AllUsers />,
+                element: (
+                    <AdminRoute>
+                        <AllUsers />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: 'add-items',
+                element: (
+                    <AdminRoute>
+                        <AddItems />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: 'manage-items',
+                element: (
+                    <AdminRoute>
+                        <ManageItems />
+                    </AdminRoute>
+                ),
             },
         ],
     },

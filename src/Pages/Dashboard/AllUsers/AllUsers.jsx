@@ -1,12 +1,16 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-underscore-dangle */
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FaTrashAlt, FaUserAlt } from 'react-icons/fa';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 function AllUsers() {
+    const [axiosSecure] = useAxiosSecure();
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:5000/users');
-        return res.json();
+        const res = await axiosSecure.get('/users');
+        return res.data;
     });
     const handleRoll = (id) => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
@@ -16,7 +20,7 @@ function AllUsers() {
             .then((data) => console.log(data));
     };
     return (
-        <div className="w-full lg:p-20">
+        <div className="w-full">
             <div className="overflow-x-auto ">
                 <table className="table table-zebra w-full">
                     {/* head */}
